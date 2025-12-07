@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ABOUT US | Stackly Agriculture Industry</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" 
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <style>
+    /* Reset & Base */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html,body { height:100%; font-family: Arial, sans-serif; }
+    body { display:flex; flex-direction:column; min-height:100vh; background:#f8f8f8; color:#222; }
+    a { text-decoration:none; color: inherit; }
+
+    /* Fixed Header */
+    nav {
+      position: fixed; top:0; left:0; width:100%; z-index:1000;
+      background:#fff; display:flex; justify-content:space-between; align-items:center;
+      padding:0 40px; height:70px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    body { padding-top:70px; } /* Prevent content hidden under fixed header */
+    .logo img { width:120px; height:auto; display:block; }
+    .menu-toggle { display:none; font-size:26px; cursor:pointer; user-select:none; }
+
+    .nav-links { list-style:none; display:flex; gap:25px; align-items:center; }
+    .nav-links li { position:relative; }
+    .nav-links a { font-weight:700; padding:8px 10px; font-size:16px; display:inline-block; transition:0.2s; color:#333; }
+    .nav-links a:hover { color:green; }
+
+    /* Dropdown */
+    .dropdown-symbol { font-size:14px; font-weight:600; cursor:pointer; padding-left:6px; user-select:none; vertical-align:middle; }
+    .dropdown-content {
+      display:none; position:absolute; top:100%; left:0; background:#fff;
+      border:1px solid #eee; border-radius:6px; min-width:140px;
+      box-shadow:0 6px 18px rgba(12,24,40,0.08); z-index:99;
+    }
+    .dropdown-content a { display:block; padding:10px 12px; font-weight:600; font-size:15px; color:#000; }
+    .dropdown-content a:hover { background:#f5f5f5; color:green; }
+
+    /* Desktop hover */
+    @media(min-width:769px){
+      .dropdown:hover .dropdown-content { display:block; }
+    }
+
+    /* Mobile menu */
+    @media(max-width:768px){
+      .menu-toggle { display:block; }
+      .nav-links {
+        position:absolute; top:70px; right:0; width:220px; flex-direction:column; align-items:flex-start;
+        padding:12px; gap:8px; background:#fff; display:none; box-shadow:0 6px 20px rgba(12,24,40,0.08);
+      }
+      .nav-links.active { display:flex; }
+      .nav-links li { width:100%; }
+      .dropdown-content { position:relative; top:0; left:0; box-shadow:none; border:none; }
+    }
+
+    /* Hero/About Section */
+    .about-section {
+      position:relative; width:100%; min-height:80vh;
+      background:url('aboutimg.jpeg') center/cover no-repeat;
+      display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; color:#fff;
+      padding:40px 20px;
+    }
+    .about-section::before {
+      content:""; position:absolute; inset:0; background:rgba(0,0,0,0.5); z-index:0;
+    }
+    .about-section h1, .about-section p { position:relative; z-index:2; }
+    .about-section h1 { font-size:clamp(28px,6vw,50px); margin-bottom:10px; }
+    .about-section p { font-size:clamp(14px,1.5vw,18px); max-width:900px; line-height:1.6; }
+
+    /* About Content */
+    .about-section1 { display:flex; justify-content:space-between; align-items:center; padding:60px 8%; gap:40px; background:#fff; flex-wrap:wrap; }
+    .about-content1 { flex:1 1 420px; min-width:280px; }
+    .about-content1 h1 { font-size:2rem; color:#2f5d33; margin-bottom:20px; }
+    .about-content1 p { font-size:1rem; color:#333; line-height:1.6; font-weight:700; margin-bottom:15px; }
+    .about-content1 ul { list-style:none; padding-left:0; margin-bottom:20px; }
+    .about-content1 ul li { margin-bottom:8px; font-weight:600; color:#444; }
+    .btn { background:#2f5d33; color:#fff; padding:10px 18px; border-radius:6px; display:inline-block; transition:0.2s; }
+    .btn:hover { background:#244827; }
+    .about-image { flex:1 1 350px; min-width:280px; text-align:center; }
+    .about-image iframe { width:100%; max-width:560px; aspect-ratio:16/9; border:none; border-radius:10px; }
+
+    /* Newsletter */
+    .newsletter { background:#fff; border-radius:10px; padding:36px 20px; max-width:1000px; margin:60px auto; display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; }
+    .newsletter-content h2 { font-size:20px; color:#2d3e3f; margin-bottom:8px; }
+    .newsletter-content p { color:#777; font-size:14px; }
+    .subscribe-form { display:flex; border:1px solid #2e4a2e; border-radius:6px; overflow:hidden; width:100%; max-width:420px; }
+    .subscribe-form input { flex:1; padding:12px; border:none; outline:none; font-size:14px; }
+    .subscribe-form button { background:#2e4a2e; color:#fff; border:none; padding:0 18px; cursor:pointer; }
+    .subscribe-form button:hover { background:#3b5e3b; }
+
+    /* Footer */
+    .footer { background: linear-gradient(135deg, hwb(120 3% 24% / 0.772), #0a3d91); color:#fff; padding:60px 20px 25px; margin-top:auto; }
+    .footer-container { max-width:1200px; margin:auto; display:flex; justify-content:space-between; flex-wrap:wrap; }
+    .footer-section { flex:1; min-width:260px; margin:15px 20px; }
+    .footer-section h3 { color:#ffcc00; margin-bottom:15px; font-size:18px; font-weight:600; }
+    .footer-section p { color:#d3d3d3; line-height:1.7; font-size:15px; margin-bottom:10px; }
+    .footer-section ul { list-style:none; }
+    .footer-section ul li { margin-bottom:10px; }
+    .footer-section ul li a { text-decoration:none; color:#d3d3d3; font-size:15px; transition:0.2s; }
+    .footer-section ul li a:hover { color:#226d2c; text-decoration:underline; }
+    .social-icons { margin-top:15px; }
+    .social-icons a { color:#b8c6ff; margin-right:12px; font-size:18px; transition:0.2s; }
+    .social-icons a:hover { color:#ffcc00; }
+    .footer-bottom { text-align:center; padding-top:20px; border-top:1px solid rgba(255,255,255,0.15); margin-top:30px; color:#c7c7c7; font-size:14px; }
+
+    /* Responsive */
+    @media(max-width:900px){
+      .about-section { min-height:60vh; padding:30px 20px; }
+      .about-section h1 { font-size:36px; }
+      .about-section p { font-size:16px; }
+      .about-section1 { padding:40px 6%; flex-direction:column; text-align:center; align-items:center; }
+      .about-image iframe { max-width:100%; margin-top:20px; }
+      .newsletter { padding:24px; margin:40px 20px; flex-direction:column; text-align:center; }
+      .subscribe-form { max-width:100%; }
+      .footer-container { flex-direction:column; text-align:center; }
+    }
+    @media(max-width:480px){
+      nav { padding:0 16px; }
+      .about-section h1 { font-size:28px; }
+      .about-section p { font-size:14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <div class="logo"><a href="index.html"><img src="Stacklylogoo.jpeg" alt="stacklylogo"/></a></div>
+      <div class="menu-toggle" id="menu-toggle">☰</div>
+      <ul class="nav-links" id="nav-links">
+        <li class="dropdown">
+          <a href="index.html">Home</a>
+          <span class="dropdown-symbol">▼</span>
+          <div class="dropdown-content">
+            <a href="home2.html">Home Page2</a>
+          </div>
+        </li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contactus.html">Contact Us</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="about-section">
+    <h1>About Us</h1>
+    <p>Stackly Agriculture Industry focuses on modern farming solutions to improve productivity and ensure food security. We use innovation and technology to build a greener future.</p>
+  </section>
+
+  <!-- About Content -->
+  <section class="about-section1">
+    <div class="about-content1">
+      <h1>Plants Make Life Better</h1>
+      <p>Plants improve our environment and well-being. They add beauty and support life on Earth in many ways.</p>
+      <ul>
+        <li>1. Purify the Air: Plants absorb CO₂ and release oxygen.</li>
+        <li>2. Boost Mental Health: Greenery reduces stress and increases focus.</li>
+        <li>3. Support Nature: Prevent soil erosion and help wildlife.</li>
+      </ul>
+      <a href="#" class="btn">GET IN TOUCH</a>
+    </div>
+    <div class="about-image">
+      <iframe src="https://www.youtube.com/embed/QXGeeLaltxs" title="Beautiful Pepper Seedlings" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="newsletter-content">
+      <h2>SUBSCRIBE TO OUR NEWSLETTER</h2>
+      <p>Stay updated with the latest trends in sustainable farming and eco-friendly techniques.</p>
+    </div>
+    <form class="subscribe-form" action="#" method="post" onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+      <input type="email" placeholder="Enter your email" maxlength="25" required/>
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section about">
+        <div class="logo"><a href="index.html"><img src="Stacklylogoo.jpeg" alt="stacklylogo"></a></div>
+        <p>We are a leading consulting firm dedicated to helping agribusinesses achieve their goals through innovative practices and expert advice.</p>
+        <div class="social-icons">
+        <a href="404.html"><i class="fab fa-facebook-f"></i></a>
+        <a href="404.html"><i class="fab fa-linkedin-in"></i></a>
+        <a href="404.html"><i class="fab fa-twitter"></i></a>
+        <a href="404.html"><i class="fab fa-instagram"></i></a>
+        <a href="404.html"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-section links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contactus.html">Contact Us</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+      <div class="footer-section contact">
+        <h3>Contact Us</h3>
+        <p><strong>Email:</strong> info@thestackly.com</p>
+        <p><strong>Phone:</strong> +91 70107 92745</p>
+        <p><strong>Location:</strong> Bengaluru, Karnataka-560068</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 Stackly Agriculture Industry. All rights reserved.</div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+    const dropdown = document.querySelector('.dropdown');
+    const dropdownSymbol = dropdown.querySelector('.dropdown-symbol');
+    const dropdownContent = dropdown.querySelector('.dropdown-content');
+
+    dropdownSymbol.addEventListener('click', e => {
+      e.stopPropagation();
+      dropdownContent.classList.toggle('active');
+    });
+
+    document.addEventListener('click', () => {
+      dropdownContent.classList.remove('active');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Forgot Password — Agriculture Portal</title>
+<style>
+  /* Base Reset */
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+
+  body { background: #f5f7fb; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
+
+  /* HEADER & NAVBAR */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  nav {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    height: 70px;
+  }
+  .logo img { width: 120px; height: auto; }
+  .nav-links { list-style: none; display: flex; gap: 25px; }
+  .nav-links li { position: relative; }
+  .nav-links a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 8px 10px;
+    display: inline-block;
+    transition: 0.3s;
+  }
+  .nav-links a:hover { color: green; }
+  .menu-toggle { display: none; font-size: 28px; cursor: pointer; }
+
+  @media(max-width:880px) {
+    .menu-toggle { display: block; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 70px;
+      right: 0;
+      flex-direction: column;
+      background: #fff;
+      width: 200px;
+      padding: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .nav-links.active { display: flex; }
+  }
+
+  /* MAIN CONTAINER */
+  .container {
+    width: 90%;
+    max-width: 500px;
+    margin: 80px auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(12,24,40,0.08);
+  }
+
+  .container h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #0f1724;
+    text-align: center;
+  }
+
+  .container p {
+    color: #555;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .input-box { margin-bottom: 16px; }
+  .input-box input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: 0.3s;
+  }
+  .input-box input:focus {
+    border-color: #226d2c;
+    box-shadow: 0 6px 18px rgba(34,109,44,0.18);
+    outline: none;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    background: linear-gradient(90deg, #226d2c 0%, #072c0c 100%);
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(34,109,44,0.3); }
+
+  .back-login {
+    text-align: center;
+    margin-top: 14px;
+    font-size: 14px;
+  }
+  .back-login a { color: #226d2c; text-decoration: none; font-weight: 600; }
+
+  @media(max-width:420px) {
+    .container { padding: 1.5rem; margin: 40px 10px; }
+  }
+
+  .msg { color: red; font-size: 13px; margin-top: 4px; }
+
+</style>
+</head>
+<body>
+
+<header>
+    <nav>
+      <div class="logo"><a href="index.html"><img src="Stacklylogoo.jpeg" alt="stacklylogo"></a></div>
+      <div class="menu-toggle" id="menu-toggle">☰</div>
+      <ul class="nav-links" id="nav-links">
+        <li class="dropdown">
+          <a href="index.html">Home</a>
+          <span class="dropdown-symbol">▼</span>
+          <div class="dropdown-content">
+            <a href="home2.html">Home Page 2</a>
+          </div>
+        </li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contactus.html">Contact Us</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+<div class="container">
+  <h1>Forgot Password</h1>
+  <p>Enter your email to reset your password.</p>
+
+  <form id="forgotForm">
+    <div class="input-box">
+      <input type="email" id="email" placeholder="Enter your email" required>
+      <div class="msg" id="email-msg"></div>
+    </div>
+    <button type="submit" class="btn">Reset Password</button>
+  </form>
+
+  <div class="back-login">
+    <a href="login.html">Back to Login</a>
+  </div>
+</div>
+
+<script>
+  // Mobile menu toggle
+  const toggle = document.getElementById("menu-toggle");
+  const navLinks = document.getElementById("nav-links");
+  toggle.addEventListener("click", ()=>{ navLinks.classList.toggle("active"); });
+
+  // Form submission
+  const form = document.getElementById("forgotForm");
+  const emailMsg = document.getElementById("email-msg");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    emailMsg.textContent = "";
+
+    if(!email) {
+      emailMsg.textContent = "Email is required.";
+      return;
+    } else if(!email.includes("@")) {
+      emailMsg.textContent = "Please enter a valid email address.";
+      return;
+    }
+
+    // Redirect to 404 page (demo)
+    window.location.href = "404.html";
+  });
+</script>
+
+</body>
+</html>

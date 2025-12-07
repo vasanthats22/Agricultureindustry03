@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Stackly Agriculture Industry</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #fff;
+}
+
+/* HEADER & NAVBAR */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav{
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            height: 70px;
+        }
+
+        .logo img{
+            width: 120px;
+            height: auto;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 8px 10px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: green;
+        }
+
+        /* Dropdown */
+        .dropdown-symbol {
+            font-size: 14px;
+            margin-left: 4px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            min-width: 150px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 8px 12px;
+            color: #000;
+            font-weight: 600;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f5f5f5;
+            color: green;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropbtn {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .dropbtn:hover .dropdown-symbol {
+            color: green;
+        }
+
+        /* Hamburger Icon */
+        .menu-toggle{
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+        }
+@media(max-width:768px){
+    .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: #fff;
+        width: 200px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+        display: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .nav-links.active{
+        display: flex;
+    }
+    .menu-toggle{
+        display: block;
+    }
+}
+
+/* Middle Section */
+.article-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.article {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0;
+}
+
+.article img {
+    width: 120px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.content {
+    flex: 1;
+}
+
+.content h3 {
+    margin: 0;
+    color: #222;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.content p {
+    margin: 5px 0 0;
+    color: #555;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.btn {
+    background-color: #28a745;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    align-self: center;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(135deg,  hwb(120 3% 24% / 0.772), #0a3d91);
+    color: #ffffff;
+    padding: 60px 20px 25px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 260px;
+    margin: 15px 20px;
+}
+
+.footer-section h3 {
+    color: #ffcc00;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.footer-section p {
+    color: #d3d3d3;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 10px;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #d3d3d3;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #226d2c;
+    text-decoration: underline;
+}
+
+.footer-section.contact strong {
+    color: #fff;
+}
+
+.social-icons {
+    margin-top: 15px;
+}
+
+.social-icons a {
+    color: #b8c6ff;
+    margin-right: 12px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    color: #ffcc00;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin-top: 30px;
+}
+
+.footer-bottom p {
+    color: #c7c7c7;
+    font-size: 14px;
+}
+
+/* Footer Responsive */
+@media (max-width: 900px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-section {
+        margin: 20px 0;
+    }
+    .social-icons a {
+        margin: 0 8px;
+    }
+}
+</style>
+
+<body>
+<!-- Header -->
+<header>             
+    <nav class="navbar">
+        <!-- Logo -->
+        <div class="logo">
+            <a href="index.html"><img src="Stacklylogoo.jpeg" alt="stacklylogo"></a>
+        </div>
+        <!-- Hamburger Icon -->
+        <div class="menu-toggle" id="menu-toggle">☰</div>
+        <!-- Navigation links -->
+        <ul class="nav-links" id="nav-links">
+            <li class="dropdown">
+                <a href="index.html">Home</a>
+                <span class="dropdown-symbol">▼</span>
+                <div class="dropdown-content">
+                    <a href="home2.html">Home Page2</a>
+                </div>
+            </li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contactus.html">Contact Us</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Middle Section -->
+<section>
+    <div class="article-container">
+        <div class="article">
+            <img src="grape.jpeg" alt="Grapes">
+            <div class="content">
+                <h3>Harvesting Tips For Grapes</h3>
+                <p>From the right harvesting time to the correct harvesting techniques and post-harvesting measures, there are a number of things you must consider while harvesting grapes ...</p>
+            </div>
+            <a href="404.html" class="btn">Read More...</a>
+        </div>
+
+        <div class="article">
+            <img src="banana.jpeg" alt="Banana">
+            <div class="content">
+                <h3>Why is soil testing important for banana farming?</h3>
+                <p>If you are planning to cultivate bananas, or any other crop for that matter, the first thing you must do is test the soil. Here’s ...</p>
+            </div>
+            <a href="404.html" class="btn">Read More...</a>
+        </div>
+
+        <div class="article">
+            <img src="cotton.jpeg" alt="Cotton">
+            <div class="content">
+                <h3>Cotton farming – the success story</h3>
+                <p>Cotton is one of the most important crops in the Marathwada and Vidarbha region of Maharashtra. At a time when most regions in the state ...</p>
+            </div>
+            <a href="404.html" class="btn">Read More...</a>
+        </div>
+
+        <div class="article">
+            <img src="onion.jpeg" alt="Onion">
+            <div class="content">
+                <h3>Important Tips On Onion Farming</h3>
+                <p>Mr. Geete and his three sons carry out onion farming in the water-deficient district of Ahmednagar. The Geete family is the perfect example of how ...</p>
+            </div>
+            <a href="404.html" class="btn">Read More...</a>
+        </div>
+
+        <div class="article">
+            <img src="wheat.jpeg" alt="Wheat">
+            <div class="content">
+                <h3>7 tips to get the best Wheat produce</h3>
+                <p>Wheat is one of the most important food crops in the world and wheat farming requires proper planning to produce a high yield. Most farmers ...</p>
+            </div>
+            <a href="404.html" class="btn">Read More...</a>
+        </div>
+
+        <div class="article">
+            <img src="tomato.jpeg" alt="Tomato">
+            <div class="content">
+                <h3>7 tips to Get the Best Tomato Yield</h3>
+                <p>Tomato farming can be immensely lucrative if you know the control parameters from the very beginning. The secret to growing plump, juicy, red tomatoes is ...</p>
+            </div>
+            <a href="404.html" class="btn">Read More...</a>
+        </div>
+
+        <div class="article">
+            <img src="grape.jpeg" alt="Grape">
+            <div class="content">
+                <h3>All you need to know about grape farming in India</h3>
+                <p>India is among the leading 10 countries in the world in the production of grapes. Mostly used in India as a table fresh fruit, grapes ...</p>
+            </div>
+            <a href="404.html" class="btn">Read More...</a>
+        </div>
+
+        <div class="article">
+            <img src="potato.jpeg" alt="Potato">
+            <div class="content">
+                <h3>Potato – diseases and symptoms</h3>
+                <p>Potatoes are one of the most common and important food sources on the planet. While there are several benefits of growing potatoes, it’s important to ...</p>
+            </div>
+            <a href="404.html" class="btn">Read More...</a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-container">
+        <!-- Left Section -->
+        <div class="footer-section about">
+            <div class="logo">
+                <a href="index.html"><img src="Stacklylogoo.jpeg" alt="stacklylogo"></a>
+            </div>
+            <p>We are a leading consulting firm dedicated to helping agribusinesses achieve their goals through innovative practices and expert advice.</p>
+            <div class="social-icons">
+                <a href="404.html"><i class="fab fa-facebook-f"></i></a>
+                <a href="404.html"><i class="fab fa-linkedin-in"></i></a>
+                <a href="404.html"><i class="fab fa-twitter"></i></a>
+                <a href="404.html"><i class="fab fa-instagram"></i></a>
+                <a href="404.html"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <!-- Middle Section -->
+        <div class="footer-section links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+
+        <!-- Right Section -->
+        <div class="footer-section contact">
+            <h3>Contact Us</h3>
+            <p><strong>Email:</strong> info@thestackly.com</p>
+            <p><strong>Phone:</strong> +91 70107 92745</p>
+            <p><strong>Location:</strong> Bengaluru, Karnataka-560068</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 Stackly Agriculture Industry. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+</script>
+</body>
+</html>

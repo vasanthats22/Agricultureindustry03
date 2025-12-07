@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly Agriculture Industry</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body{
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* HEADER & NAVBAR */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav{
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            height: 70px;
+        }
+
+        .logo img{
+            width: 120px;
+            height: auto;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 8px 10px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: green;
+        }
+
+        /* Dropdown */
+        .dropdown-symbol {
+            font-size: 14px;
+            margin-left: 4px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            min-width: 150px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 8px 12px;
+            color: #000;
+            font-weight: 600;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f5f5f5;
+            color: green;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropbtn {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .dropbtn:hover .dropdown-symbol {
+            color: green;
+        }
+
+        /* Hamburger Icon */
+        .menu-toggle{
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* HERO SECTION */
+        .hero{
+            flex: 1;
+            height: calc(100vh - 70px);
+            background: url("green-wheat.jpg.webp") no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            margin-top: 0;
+            padding: 80px 20px;
+            flex-direction: column;
+        }
+
+        .hero::after{
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .hero-content{
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            padding: 20px;
+        }
+
+        .hero-content h1{
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p{
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* WHY CHOOSE US */
+        .why-choose-us {
+            display: flex;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        .image-section {
+            flex: 1;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .content-section {
+            flex: 1;
+            background: #226d2c;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 50px;
+        }
+
+        .content-section h4 {
+            font-weight: 400;
+            color: #c8e6c9;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .content-section h2 {
+            font-size: 32px;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .content-section h2 span {
+            font-weight: bold;
+        }
+
+        .content-section p {
+            font-size: 15px;
+            margin-bottom: 30px;
+            color: #e8f5e9;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature img {
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+        }
+
+        .feature h3, .feature p {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature h3 {
+            margin-bottom: 5px;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .feature p {
+            font-size: 14px;
+            color: #c8e6c9;
+            margin: 0;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: linear-gradient(135deg, hwb(120 3% 24% / 0.772), #0a3d91);
+            color: #fff;
+            padding: 60px 20px 25px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 260px;
+            margin: 15px 20px;
+        }
+
+        .footer-section h3 {
+            color: #ffcc00;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .footer-section p {
+            color: #d3d3d3;
+            line-height: 1.7;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            text-decoration: none;
+            color: #d3d3d3;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #226d2c;
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            color: #b8c6ff;
+            margin-right: 12px;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #ffcc00;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            margin-top: 30px;
+        }
+
+        .footer-bottom p {
+            color: #c7c7c7;
+            font-size: 14px;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width: 768px){
+            .menu-toggle{
+                display: block;
+            }
+
+            .nav-links{
+                position: absolute;
+                top: 70px;
+                right: 0;
+                background-color: #fff;
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px 20px;
+                display: none;
+            }
+
+            .nav-links.active{
+                display: flex;
+            }
+
+            .why-choose-us {
+                flex-direction: column;
+            }
+
+            .image-section img {
+                height: 300px;
+            }
+
+            .content-section {
+                padding: 40px 25px;
+            }
+        }
+
+        @media(max-width: 800px) {
+            .services-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html"><img src="Stacklylogoo.jpeg" alt="stacklylogo"></a>
+            </div>
+
+            <div class="menu-toggle" id="menu-toggle">☰</div>
+
+            <ul class="nav-links" id="nav-links">
+                <li class="dropdown">
+                    <a href="index.html" class="dropbtn">Home <span class="dropdown-symbol">▼</span></a>
+                    <div class="dropdown-content">
+                        <a href="Home2.html">Home Page2</a>
+                    </div>
+                </li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Farming as a Passion</h1>
+            <p>Farming is not just a profession; for many people, <br>
+               it is a passion and a way of life. A passionate farmer <br>
+               sees farming as more than growing crops or raising animals <br>
+               it is about caring for the land, nurturing life, and contributing to <br>
+               society.<br></p>
+        </div>
+    </section>
+    <br>
+
+    <!-- WHY CHOOSE US -->
+    <section class="why-choose-us">
+        <div class="image-section">
+            <img src="farmingland.avif" alt="Farmer Image">
+        </div>
+        <div class="content-section">
+            <h4>WHY CHOOSE US</h4>
+            <h2>More than <span>50 year experience</span> in agriculture industry</h2>
+            <p>50 years of change mean farmers can produce more food and fiber on fewer acres and with fewer nutrient inputs.</p>
+
+            <div class="features">
+                <div class="feature">
+                    <img src="rainicon.png" alt="">
+                    <div>
+                        <h3>Plants needs rain</h3>
+                        <p>Plants need rain to grow and stay healthy.</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <img src="iloveorganic.png" alt="">
+                    <div>
+                        <h3>Love organic foods</h3>
+                        <p>I love organic foods because they are fresh and healthy.</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <img src="sellvegies.png" alt="">
+                    <div>
+                        <h3>Sell vegies</h3>
+                        <p>I sell fresh and organic vegetables.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section about">
+                <div class="logo">
+                    <a href="index.html"><img src="Stacklylogoo.jpeg" alt="stacklylogo"></a>
+                </div>
+                <p>We are a leading consulting firm dedicated to helping agribusinesses achieve their goals through innovative practices and expert advice.</p>
+                <div class="social-icons">
+                    <a href="404.html"><i class="fab fa-facebook-f"></i></a>
+                    <a href="404.html"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="404.html"><i class="fab fa-twitter"></i></a>
+                    <a href="404.html"><i class="fab fa-instagram"></i></a>
+                    <a href="404.html"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contactus.html">Contact Us</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p><strong>Email:</strong> info@thestackly.com</p>
+                <p><strong>Phone:</strong> +91 70107 92745</p>
+                <p><strong>Location:</strong> Bengaluru, Karnataka-560068</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Stackly Agriculture Industry. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JS for mobile menu -->
+    <script>
+        const menuToggle = document.getElementById("menu-toggle");
+        const navLinks = document.getElementById("nav-links");
+        menuToggle.addEventListener("click", ()=>{
+            navLinks.classList.toggle("active");
+        });
+    </script>
+
+</body>
+</html>

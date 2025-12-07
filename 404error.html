@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 Page | Stackly Agriculture Industry</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    /* Navbar */
+    nav {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      width: 100%;
+      height: 70px;
+      z-index: 1000;
+    }
+
+    .logo img {
+      width: 120px;
+      height: auto;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links li {
+      position: relative;
+      display: inline-block;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+      transition: 0.3s;
+      padding: 8px 10px;
+    }
+
+    .nav-links a:hover {
+      color: green;
+    }
+
+    .dropdown-symbol {
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #000;
+      padding: 8px 4px;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      min-width: 120px;
+      z-index: 999;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 8px 10px;
+      color: #000;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+    }
+
+    .dropdown-symbol:hover + .dropdown-content,
+    .dropdown-content:hover {
+      display: block;
+    }
+
+    /* Hamburger */
+    .menu-toggle {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    @media(max-width:768px){
+      .nav-links{
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background-color: #fff;
+        width: 200px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+        display: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      .nav-links.active{
+        display: flex;
+      }
+      .menu-toggle{
+        display: block;
+      }
+    }
+
+    /* 404 Section */
+    .section-404-search {
+      text-align: center;
+      background-color: #fff;
+      padding: 4rem 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      width: 90%;
+      max-width: 900px;
+      margin: 3rem auto;
+    }
+
+    .section-404-search h1 {
+      color: #0d6efd;
+      font-weight: bold;
+      font-size: 8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-404-search h2 {
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .section-404-search p {
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 2rem;
+    }
+
+    .section-404-search input[type="text"] {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-404-search .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .section-404-search .buttons a {
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .section-404-search .btn-home {
+      background-color: #0d6efd;
+    }
+
+    .section-404-search .btn-support {
+      background-color: #6c757d;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .section-404-search h1 {
+        font-size: 6rem;
+      }
+      .section-404-search input[type="text"] {
+        max-width: 100%;
+      }
+      .section-404-search .buttons a {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section-404-search h1 {
+        font-size: 4rem;
+      }
+      .section-404-search h2 {
+        font-size: 1.5rem;
+      }
+      .section-404-search p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav class="navbar">
+      <div class="logo"><a href="index.html"><img src="Stacklylogoo.jpeg" alt="stacklylogo"></a></div>
+      <div class="menu-toggle" id="menu-toggle">☰</div>
+      <ul class="nav-links" id="nav-links">
+        <li class="dropdown">
+          <a href="Home2.html">Home</a>
+          <span class="dropdown-symbol">▼</span>
+          <div class="dropdown-content">
+            <a href="index.html">Home page1</a>
+          </div>
+        </li>
+        <li><a href="aboutus2.html">About Us</a></li>
+        <li><a href="crop-portfolio.html">Crop Portfolio</a></li>
+        <li><a href="service2.html">Services</a></li>
+        <li><a href="privacypolicy.html">Privacy Policy</a></li>
+        <li><a href="blog2.html">Blog</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- 404 Section -->
+  <section class="section-404-search">
+    <h1>404</h1>
+    <h2>Page Not Found</h2>
+    <p>Sorry, we couldn't find the page you're looking for. The page might have been moved, deleted, or you entered an incorrect URL.</p>
+    <input type="text" placeholder="What are you looking for?" />
+    <div class="buttons">
+      <a href="Home2.html" class="btn-home">Back to Homepage</a>
+      <a href="404error.html" class="btn-support">Contact Support</a>
+    </div>
+  </section>
+
+  <!-- Script for Hamburger Menu -->
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+
+</body>
+</html>

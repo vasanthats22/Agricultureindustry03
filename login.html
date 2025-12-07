@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login For Agriculture Industry</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:"Arial",sans-serif; }
+    body { display:flex; flex-direction:column; min-height:100vh; background:#f5f7fb; overflow-x:hidden; }
+
+    /* HEADER */
+    header { position:sticky; top:0; z-index:1000; }
+    nav { background:#fff; box-shadow:0 2px 4px rgba(0,0,0,0.1); display:flex; justify-content:space-between; align-items:center; padding:15px 40px; height:70px; }
+    .logo img { width:120px; height:auto; }
+    .nav-links { list-style:none; display:flex; gap:25px; }
+    .nav-links li { position:relative; }
+    .nav-links a { text-decoration:none; color:#000; font-weight:600; font-size:16px; padding:8px 10px; display:inline-block; transition:0.3s; }
+    .nav-links a:hover { color:green; }
+    .dropdown-symbol { font-size:14px; margin-left:4px; }
+    .dropdown-content { display:none; position:absolute; top:100%; left:0; background:#fff; border:1px solid #eee; border-radius:4px; min-width:150px; box-shadow:0 4px 10px rgba(0,0,0,0.1); z-index:1000; }
+    .dropdown-content a { display:block; padding:8px 12px; color:#000; font-weight:600; }
+    .dropdown-content a:hover { background:#f5f5f5; color:green; }
+    .dropdown:hover .dropdown-content { display:block; }
+    .dropbtn { display:flex; align-items:center; gap:4px; }
+    .dropbtn:hover .dropdown-symbol { color:green; }
+    .menu-toggle { display:none; font-size:28px; cursor:pointer; }
+
+    /* CONTAINER */
+    .container { width:90%; max-width:1200px; margin:2rem auto; background:#fff; display:flex; flex-wrap:wrap; border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(12,24,40,0.08); }
+    .login-section, .info-section { flex:1 1 400px; padding:2rem; }
+
+    /* LOGIN */
+    .login-section h1 { font-size:28px; color:#0f1724; margin-bottom:10px; }
+    .login-section p { color:#555; margin-bottom:16px; }
+    .input-box { margin-bottom:16px; position:relative; }
+    .input-box input { width:100%; padding:12px 14px; border:1px solid #d1d5db; border-radius:10px; font-size:15px; transition:0.3s; }
+    .input-box input:focus { border-color:#226d2c; box-shadow:0 6px 18px rgba(34,109,44,0.18); outline:none; }
+    .password-box { position:relative; }
+    .password-box span { position:absolute; right:12px; top:50%; transform:translateY(-50%); cursor:pointer; font-size:18px; }
+    .options { display:flex; justify-content:space-between; align-items:center; font-size:14px; margin-bottom:18px; }
+    .btn { display:inline-flex; justify-content:center; align-items:center; width:100%; padding:12px 14px; font-weight:600; border:none; border-radius:12px; cursor:pointer; transition:0.3s; }
+    .primary-btn { background:linear-gradient(90deg,#226d2c 0%,#072c0c 100%); color:#fff; }
+    .primary-btn:hover { transform:translateY(-3px); box-shadow:0 6px 18px rgba(34,109,44,0.3); }
+    .divider { text-align:center; color:#9aa3b2; margin:16px 0; font-size:13px; }
+    .social-login { display:flex; gap:12px; }
+    .social-btn { flex:1; padding:10px 12px; border:1px solid #e6e7ea; border-radius:10px; background:#fff; color:#111; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; text-decoration:none; }
+    .social-btn img { width:18px; height:18px; }
+    .signup-text { text-align:center; margin-top:12px; font-size:14px; }
+    .signup-text a { color:#226d2c; text-decoration:none; font-weight:700; }
+
+    /* INFO SECTION */
+    .info-section { background:linear-gradient(135deg,#226d2c 0%,#072c0c 100%); color:#fff; display:flex; flex-direction:column; justify-content:center; gap:12px; }
+    .info-section h2 { font-size:26px; margin-bottom:8px; }
+    .info-section p { color:rgba(255,255,255,0.9); }
+    .info-section ul { list-style:none; padding:0; margin-top:6px; display:grid; gap:8px; }
+    .info-section li { font-size:15px; }
+
+    /* INLINE MESSAGE */
+    .msg { margin-top:8px; font-size:14px; color:red; }
+    .msg.success { color:green; }
+
+    /* RESPONSIVE */
+    @media(max-width:880px) { .container { flex-direction:column; width:95%; margin:1rem auto; } .social-login { flex-direction:column; } .social-btn { width:100%; } nav { flex-wrap:wrap; padding:1rem; } .menu-toggle { display:block; } .nav-links { position:absolute; top:60px; right:0; width:200px; flex-direction:column; align-items:flex-start; background:#fff; display:none; box-shadow:0 2px 8px rgba(0,0,0,0.1); padding:10px; } .nav-links.active { display:flex; } }
+    @media(max-width:420px) { .container { border-radius:10px; } .login-section, .info-section { padding:1.2rem; } }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo"><a href="index.html"><img src="Stacklylogoo.jpeg" alt="stacklylogo"></a></div>
+      <div class="menu-toggle" id="menu-toggle">☰</div>
+      <ul class="nav-links" id="nav-links">
+        <li class="dropdown">
+          <a href="index.html">Home</a>
+          <span class="dropdown-symbol">▼</span>
+          <div class="dropdown-content">
+            <a href="home2.html">Home Page 2</a>
+          </div>
+        </li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contactus.html">Contact Us</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="login-section">
+      <div class="logo"><a href="index.html"><img src="Stacklylogoo.jpeg" alt="stacklylogo"></a></div>
+      <h1>Welcome Back</h1>
+      <p>Login to monitor your agricultural activities, soil health, and harvest projection.</p>
+
+      <form id="loginForm">
+        <label>Email Address</label>
+        <div class="input-box">
+          <input type="email" id="email" placeholder="Enter your email" maxlength="25" required />
+          <div class="msg" id="email-msg"></div>
+        </div>
+
+        <label>Password</label>
+        <div class="input-box password-box">
+          <input type="password" id="password" placeholder="Enter your password" required />
+          <span id="togglePassword">👁️</span>
+          <div class="msg" id="password-msg"></div>
+        </div>
+
+        <div class="options">
+          <label><input type="checkbox" id="remember"> Remember me</label>
+        </div>
+        <!-- Forgot Password -->
+<div class="forgot-password" style="text-align:right; margin-top:6px; font-size:14px;">
+  <a href="forgot.html" style="color:#2a7cc7; text-decoration:underline;">Forgot Password?</a>
+</div>
+ <br>
+
+        <button type="submit" class="btn primary-btn">Sign In</button>
+        <div class="msg" id="form-msg"></div>
+
+        <div class="divider">Or continue with</div>
+        <div class="social-login">
+          <a href="404.html" class="btn social-btn google">
+            <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="google" /> Google
+          </a>
+          <a href="404.html" class="btn social-btn linkedin">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="linkedin" /> LinkedIn
+          </a>
+        </div>
+
+        <p class="signup-text">Don’t have an account? <a href="signin.html">Sign up here</a></p>
+      </form>
+    </div>
+
+    <div class="info-section">
+      <h2>CropMaster Client Portal</h2>
+      <p>Access your farming dashboard, schedule crop maintenance, and secure communications all in one place.</p>
+      <ul>
+        <li>🔍 Monitor farm analytics</li>
+        <li>📅 Schedule crop maintenance</li>
+        <li>🌾 Plan future harvests</li>
+        <li>🔒 Encrypted data security</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+    menuToggle.addEventListener("click", () => { navLinks.classList.toggle("active"); });
+
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordField = document.getElementById("password");
+    togglePassword.addEventListener("click", () => {
+      const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+      passwordField.setAttribute("type", type);
+      togglePassword.textContent = type === "password" ? "👁️" : "🙈";
+    });
+
+    const loginForm = document.getElementById("loginForm");
+    const emailMsg = document.getElementById("email-msg");
+    const passwordMsg = document.getElementById("password-msg");
+    const formMsg = document.getElementById("form-msg");
+
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      // Reset messages
+      emailMsg.textContent = "";
+      passwordMsg.textContent = "";
+      formMsg.textContent = "";
+      formMsg.classList.remove("success");
+
+      let valid = true;
+
+      if (!email) { emailMsg.textContent = "Email is required."; valid = false; }
+      else if (!email.includes("@")) { emailMsg.textContent = "Enter a valid email address."; valid = false; }
+
+      if (!password) { passwordMsg.textContent = "Password is required."; valid = false; }
+      else if (password.length < 6) { passwordMsg.textContent = "Password must be at least 6 characters."; valid = false; }
+
+      if (valid) {
+        formMsg.textContent = "Login successful!";
+        formMsg.classList.add("success");
+        setTimeout(() => { window.location.href = "404.html"; }, 2);
+      }
+    });
+  </script>
+</body>
+</html>

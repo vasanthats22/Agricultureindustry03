@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | Stackly Agriculture Industry</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-color: #f8f9fa;
+    }
+
+    /* HEADER & NAVBAR */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav{
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            height: 70px;
+        }
+
+        .logo img{
+            width: 120px;
+            height: auto;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 8px 10px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: green;
+        }
+
+        /* Dropdown */
+        .dropdown-symbol {
+            font-size: 14px;
+            margin-left: 4px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            min-width: 150px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 8px 12px;
+            color: #000;
+            font-weight: 600;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f5f5f5;
+            color: green;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropbtn {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .dropbtn:hover .dropdown-symbol {
+            color: green;
+        }
+
+        /* Hamburger Icon */
+        .menu-toggle{
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+
+    @media(max-width:768px){
+      .nav-links{
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background-color: #fff;
+        width: 220px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+        display: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      .nav-links.active{
+        display: flex;
+      }
+      .menu-toggle{
+        display: block;
+      }
+    }
+
+    /* Services Section */
+    .services-section {
+      text-align: center;
+      padding: 50px 20px;
+      background-color: #f9f9f9;
+    }
+
+    .services-section h2 {
+      font-size: 38px;
+      margin-bottom: 20px;
+      color: #2e4a2e;
+    }
+
+    .services-section h3 {
+      font-size: 24px;
+      margin-bottom: 40px;
+      color: #2e4a2e;
+    }
+
+    .services-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .service-box {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 30px 20px;
+      width: 300px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .service-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .service-icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+      color: #3c6e3c;
+    }
+
+    .service-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .service-box a {
+      color: #0d6efd;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .service-box a:hover {
+      text-decoration: underline;
+    }
+
+    @media(max-width: 800px) {
+      .services-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    /* Footer */
+    .footer {
+      background: linear-gradient(135deg,  hwb(120 3% 24% / 0.772), #0a3d91);
+      color: #ffffff;
+      padding: 60px 20px 25px;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 260px;
+      margin: 15px 20px;
+    }
+
+    .footer-section p {
+      color: #d3d3d3;
+      line-height: 1.7;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .footer-section h3 {
+      color: #ffcc00;
+      margin-bottom: 15px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-section ul li a {
+      text-decoration: none;
+      color: #d3d3d3;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .footer-section ul li a:hover {
+      color: #226d2c;
+      text-decoration: underline;
+    }
+
+    .footer-section.contact p strong {
+      color: #ffffff;
+    }
+
+    .social-icons a {
+      color: #b8c6ff;
+      margin-right: 12px;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #ffcc00;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      margin-top: 30px;
+      font-size: 14px;
+      color: #c7c7c7;
+    }
+
+    @media (max-width: 900px) {
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .footer-section {
+        margin: 20px 0;
+      }
+      .social-icons a {
+        margin: 0 8px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>             
+    <nav class="navbar">
+      <div class="logo">
+        <a href="index.html"><img src="Stacklylogoo.jpeg" alt="stacklylogo"></a>
+      </div>
+      <div class="menu-toggle" id="menu-toggle">☰</div>
+      <ul class="nav-links" id="nav-links">
+        <li class="dropdown">
+          <a href="index.html">Home</a>
+          <span class="dropdown-symbol">▼</span>
+          <div class="dropdown-content">
+            <a href="home2.html">Home Page2</a>
+          </div>
+        </li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contactus.html">Contact Us</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <h2>SERVICES</h2>
+    <h3>Providing Fresh Produce Every Single Day</h3>
+    <div class="services-container">
+      <div class="service-box">
+        <i class="fas fa-seedling service-icon"></i>
+        <div class="service-title">Planting</div>
+        <div class="service-desc">An area where plants are grown for commercial or decorative purposes.</div>
+        <div class="service-desc">Also: the plants grown in such an area.</div>
+        <br><a href="404.html">Click here</a>
+      </div>
+
+      <div class="service-box">
+        <i class="fas fa-hand-holding-water service-icon"></i>
+        <div class="service-title">Mulching</div>
+        <div class="service-desc">Mulching is the process of covering the topsoil with plant material such as leaves, grass, twigs, crop residues, straw etc.</div>
+        <br><a href="404.html">Click here</a>
+      </div>
+
+      <div class="service-box">
+        <i class="fas fa-tractor service-icon"></i>
+        <div class="service-title">Plowing</div>
+        <div class="service-desc">Process which allows to remove horizontal clods from the soil.</div>
+        <br><a href="404.html">Click here</a>
+      </div>
+
+      <div class="service-box">
+        <i class="fas fa-shovel service-icon"></i>
+        <div class="service-title">Mowing</div>
+        <div class="service-desc">The act of cutting down (grass, crops, etc.) with a hand implement or machine.</div>
+        <br><a href="404.html">Click here</a>
+      </div>
+
+      <div class="service-box">
+        <i class="fas fa-shovel service-icon"></i>
+        <div class="service-title">Seeding</div>
+        <div class="service-desc">Seeding in farming means planting seeds in the soil to grow crops.</div>
+        <br><a href="404.html">Click here</a>
+      </div>
+
+      <div class="service-box">
+        <i class="fas fa-shovel service-icon"></i>
+        <div class="service-title">Watering</div>
+        <div class="service-desc">It is the practice of applying controlled amounts of water to land to help grow crops, landscape plants, and lawns.</div>
+        <br><a href="404.html">Click here</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section about">
+        <div class="logo">
+          <a href="index.html"><img src="Stacklylogoo.jpeg" alt="stacklylogo"></a>
+        </div>
+        <p>We are a leading consulting firm dedicated to helping agribusinesses achieve their goals through innovative practices and expert advice.</p>
+        <div class="social-icons">
+          <a href="404.html"><i class="fab fa-facebook-f"></i></a>
+          <a href="404.html"><i class="fab fa-linkedin-in"></i></a>
+          <a href="404.html"><i class="fab fa-twitter"></i></a>
+          <a href="404.html"><i class="fab fa-instagram"></i></a>
+          <a href="404.html"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contactus.html">Contact Us</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section contact">
+        <h3>Contact Us</h3>
+        <p><strong>Email:</strong> info@thestackly.com</p>
+        <p><strong>Phone:</strong> +91 70107 92745</p>
+        <p><strong>Location:</strong> Bengaluru, Karnataka-560068</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Stackly Agriculture Industry. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JS for Hamburger -->
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+
+</body>
+</html>

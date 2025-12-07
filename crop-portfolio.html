@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: #fff;
+      color: #333;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* ===== HEADER ===== */
+    nav {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      position: fixed;  /* fixed header */
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      height: 70px;
+    }
+
+    .logo img {
+      width: 120px;
+      height: auto;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links li {
+      position: relative;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+      transition: 0.3s;
+      padding: 8px 10px;
+    }
+
+    .nav-links a:hover {
+      color: green;
+      text-decoration: underline;
+    }
+
+    /* Dropdown */
+    .dropdown-symbol {
+      font-size: 14px;
+      cursor: pointer;
+      color: #000;
+      padding: 8px 4px;
+      user-select: none;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .dropdown-symbol:hover {
+      color: green;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      min-width: 120px;
+      z-index: 999;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 8px 10px;
+      color: #000;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f5f5f5;
+      color: green;
+    }
+
+    .dropdown-symbol:hover + .dropdown-content,
+    .dropdown-content:hover {
+      display: block;
+    }
+
+    /* Hamburger menu */
+    .menu-toggle {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    @media(max-width:768px) {
+      .nav-links {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background-color: #fff;
+        width: 220px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+        display: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links li {
+        width: 100%;
+      }
+
+      .nav-links li a {
+        width: 100%;
+        padding: 12px 10px;
+      }
+
+      .dropdown-content {
+        position: relative;
+        top: 0;
+        left: 0;
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+      }
+    }
+
+    /* ===== CROP SECTION ===== */
+    .crop-section {
+      padding: 120px 20px 40px; /* top padding to avoid header overlap */
+      text-align: center;
+    }
+
+    .crop-section h2 {
+      color: #e57c23;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .crop-section p {
+      max-width: 850px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    .crop-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      justify-items: center;
+    }
+
+    .crop-card {
+      text-align: center;
+    }
+
+    .crop-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #2dbf4d;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #24973d;
+      transform: scale(1.05);
+    }
+
+    /* Responsive grid */
+    @media (max-width: 1024px) {
+      .crop-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .crop-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .crop-container {
+        grid-template-columns: 1fr;
+      }
+
+      .crop-card img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: linear-gradient(135deg,  hwb(120 3% 24% / 0.772), #0a3d91);
+      color: #ffffff;
+      padding: 60px 20px 25px;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 260px;
+      margin: 15px 20px;
+    }
+
+    .footer-section p {
+      color: #d3d3d3;
+      line-height: 1.7;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .footer-section h3 {
+      color: #ffcc00;
+      margin-bottom: 15px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-section ul li a {
+      text-decoration: none;
+      color: #d3d3d3;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .footer-section ul li a:hover {
+      color: #226d2c;
+      text-decoration: underline;
+    }
+
+    .social-icons {
+      margin-top: 15px;
+    }
+
+    .social-icons a {
+      color: #b8c6ff;
+      margin-right: 12px;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #ffcc00;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      margin-top: 30px;
+    }
+
+    .footer-bottom p {
+      color: #c7c7c7;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-section {
+        margin: 20px 0;
+      }
+
+      .social-icons a {
+        margin: 0 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="index.html"><img src="Stacklylogoo.jpeg" alt="stacklylogo"></a>
+      </div>
+      <div class="menu-toggle" id="menu-toggle">☰</div>
+      <ul class="nav-links" id="nav-links">
+        <li class="dropdown">
+          <a href="Home2.html">Home</a>
+          <span class="dropdown-symbol">▼</span>
+          <div class="dropdown-content">
+            <a href="index.html">Home Page1</a>
+          </div>
+        </li>
+        <li><a href="aboutus2.html">About Us</a></li>
+        <li><a href="crop-portfolio.html">Crop Portfolio</a></li>
+        <li><a href="service2.html">Services</a></li>
+        <li><a href="privacypolicy.html">Privacy Policy</a></li>
+        <li><a href="blog2.html">Blog</a></li>
+        <li><a href="login2.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- CROP SECTION -->
+  <section class="crop-section">
+    <h2>Crop Portfolio</h2>
+    <p>
+      Here’s everything you need to know about a wide range of crops such as banana, tomato, onion,
+      grapes, cotton, pomegranate and more. Browse through these sections to get complete information
+      and valuable farming tips. This section covers important information related to crops such as 
+      climate and soils, land preparation, seed rate and spacing, crop nutrition management, irrigation 
+      management, weeds and weed management, harvesting and post harvesting measures, plant diseases, 
+      how to get better quality and more.
+    </p>
+
+    <div class="crop-container">
+      <div class="crop-card">
+        <img src="bananaa1.jpeg" alt="Banana">
+        <a href="404error.html" class="btn">Banana Farming Tips</a>
+      </div>
+      <div class="crop-card">
+        <img src="cotton1.jpeg" alt="Cotton">
+        <a href="404error.html" class="btn">Cotton Farming Tips</a>
+      </div>
+      <div class="crop-card">
+        <img src="grape1.jpeg" alt="Grapes">
+        <a href="404error.html" class="btn">Grapes Farming Tips</a>
+      </div>
+      <div class="crop-card">
+        <img src="onion1.jpeg" alt="Onion">
+        <a href="404error.html" class="btn">Onion Farming Tips</a>
+      </div>
+      <div class="crop-card">
+        <img src="groundnut1.jpeg" alt="Groundnut">
+        <a href="404error.html" class="btn">Groundnut Farming Tips</a>
+      </div>
+      <div class="crop-card">
+        <img src="pomegranate1.jpeg" alt="Pomegranate">
+        <a href="404error.html" class="btn">Pomegranate Farming Tips</a>
+      </div>
+      <div class="crop-card">
+        <img src="sugarcane1.jpeg" alt="Sugarcane">
+        <a href="404error.html" class="btn">Sugarcane Farming Tips</a>
+      </div>
+      <div class="crop-card">
+        <img src="tomato1.jpeg" alt="Tomato">
+        <a href="404error.html" class="btn">Tomato Farming Tips</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section about">
+        <div class="logo">
+          <a href="index.html"><img src="Stacklylogoo.jpeg" alt="stacklylogo"></a>
+        </div>
+        <p>We are a leading consulting firm dedicated to helping agribusinesses achieve their goals through innovative practices and expert advice.</p>
+        <div class="social-icons">
+          <a href="404error.html"><i class="fab fa-facebook-f"></i></a>
+        <a href="404error.html"><i class="fab fa-linkedin-in"></i></a>
+        <a href="404error.html"><i class="fab fa-twitter"></i></a>
+        <a href="404error.html"><i class="fab fa-instagram"></i></a>
+        <a href="404error.html"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="Home2.html">Home</a></li>
+          <li><a href="aboutus2.html">About Us</a></li>
+          <li><a href="crop-portfolio.html">Crop Portfolio</a></li>
+          <li><a href="service2.html">Services</a></li>
+          <li><a href="privacypolicy.html">Privacy Policy</a></li>
+          <li><a href="blog2.html">Blog</a></li>
+          <li><a href="login2.html">Login</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section contact">
+        <h3>Contact Us</h3>
+        <p><strong>Email:</strong> info@thestackly.com</p>
+        <p><strong>Phone:</strong> +91 70107 92745</p>
+        <p><strong>Location:</strong> Bengaluru, Karnataka-560068</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Stackly Agriculture Industry. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Toggle mobile menu
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  </script>
+
+</body>
+</html>

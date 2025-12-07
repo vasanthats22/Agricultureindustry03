@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Stackly Agriculture Industry</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <style>
+    /* ===== Reset & Base ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: #f9f9f9;
+    }
+
+    /* ===== Header ===== */
+    nav {
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .logo img {
+      width: 130px;
+      height: auto;
+    }
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #222;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .nav-links a:hover {
+      color: green;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-symbol {
+      cursor: pointer;
+      padding-left: 4px;
+      font-size: 14px;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      font-size: 15px;
+      color: #000;
+    }
+    .dropdown-content a:hover {
+      background: #f3f3f3;
+      color: green;
+    }
+    .dropdown-symbol:hover + .dropdown-content,
+    .dropdown-content:hover {
+      display: block;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    @media(max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      .nav-links {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        width: 220px;
+        display: none;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        padding: 15px;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+    }
+
+    /* ===== Hero Section ===== */
+    .contact-hero {
+      background: url('contactpage.jpeg') center/cover no-repeat;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      color: #fff;
+      text-align: center;
+    }
+    .contact-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+    }
+    .contact-hero div {
+      position: relative;
+    }
+    .contact-hero h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+    .contact-hero p {
+      font-size: 18px;
+    }
+
+    /* ===== Map ===== */
+    .map-section iframe {
+      width: 100%;
+      height: 350px;
+      border: 0;
+      display: block;
+    }
+
+    /* ===== Contact Form ===== */
+    .contact-form {
+      padding: 60px 10%;
+      background: #f9f9f9;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    .contact-info, .form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      flex: 1 1 45%;
+    }
+    .contact-info h2 {
+      color: #2c662d;
+      margin-bottom: 10px;
+    }
+    .contact-info p {
+      color: #555;
+      font-size: 15px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .info-box h4 {
+      color: #2c662d;
+      margin-bottom: 5px;
+    }
+    .form-group {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 15px;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: green;
+    }
+    button {
+      background: #228B22;
+      color: #fff;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #1e7a1e;
+    }
+    @media(max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      background: linear-gradient(135deg, hwb(120 3% 24% / 0.772), #0a3d91);
+      color: #fff;
+      padding: 60px 20px 25px;
+      margin-top: auto;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .footer-section {
+      flex: 1;
+      min-width: 260px;
+      margin: 15px 20px;
+    }
+    .footer-section h3 {
+      color: #ffcc00;
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+    .footer-section p {
+      color: #ddd;
+      font-size: 15px;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    .footer-section ul {
+      list-style: none;
+    }
+    .footer-section ul li {
+      margin-bottom: 10px;
+    }
+    .footer-section ul li a {
+      color: #ccc;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .footer-section ul li a:hover {
+      color: #ffcc00;
+    }
+    .social-icons a {
+      color: #ccc;
+      margin-right: 12px;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+    .social-icons a:hover {
+      color: #ffcc00;
+    }
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      margin-top: 30px;
+      padding-top: 20px;
+      font-size: 14px;
+    }
+    @media(max-width: 900px) {
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .footer-section {
+        margin: 20px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== Header ===== -->
+  <nav>
+    <div class="logo">
+      <a href="index.html"><img src="Stacklylogoo.jpeg" alt="Stackly Logo" /></a>
+    </div>
+    <div class="menu-toggle" id="menu-toggle">☰</div>
+    <ul class="nav-links" id="nav-links">
+      <li class="dropdown">
+        <a href="index.html">Home</a>
+        <span class="dropdown-symbol">▼</span>
+        <div class="dropdown-content">
+          <a href="home2.html">Home Page2</a>
+        </div>
+      </li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="aboutus.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contactus.html">Contact Us</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== Hero ===== -->
+  <section class="contact-hero">
+    <div>
+      <h1>Contact</h1>
+      <p>For more details, contact our Stackly Agriculture team.</p>
+    </div>
+  </section>
+
+  <!-- ===== Map ===== -->
+  <section class="map-section">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3021.880777551713!2d-74.00714918459273!3d40.710132979332075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a1787b1d8fb%3A0xd94e76f86c807b6!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1616765040489!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+  </section>
+
+  <!-- ===== Contact Form ===== -->
+  <section class="contact-form">
+    <div class="container">
+      <div class="contact-info">
+        <h2>Get in Touch</h2>
+        <p>We're here to grow together — reach out to us anytime.</p>
+        <div class="info-box">
+          <h4>Location:</h4>
+          <p>Bengaluru, Karnataka - 560068</p>
+        </div>
+        <div class="info-box">
+          <h4>Email:</h4>
+          <p>info@thestackly.com</p>
+        </div>
+        <div class="info-box">
+          <h4>Call:</h4>
+          <p>+91 70107 92745</p>
+        </div>
+      </div>
+
+      <form class="form">
+        <div class="form-group">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" maxlength="25" required />
+        </div>
+        <input type="text" placeholder="Subject" required />
+        <textarea placeholder="Message" rows="6" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section about">
+        <div class="logo">
+          <a href="index.html"><img src="Stacklylogoo.jpeg" alt="Stackly Logo" /></a>
+        </div>
+        <p>We are a leading consulting firm dedicated to helping agribusinesses achieve their goals through innovative practices and expert advice.</p>
+        <div class="social-icons">
+          <a href="404.html"><i class="fab fa-facebook-f"></i></a>
+          <a href="404.html"><i class="fab fa-linkedin-in"></i></a>
+          <a href="404.html"><i class="fab fa-twitter"></i></a>
+          <a href="404.html"><i class="fab fa-instagram"></i></a>
+          <a href="404.html"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contactus.html">Contact Us</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section contact">
+        <h3>Contact Us</h3>
+        <p><strong>Email:</strong> info@thestackly.com</p>
+        <p><strong>Phone:</strong> +91 70107 92745</p>
+        <p><strong>Location:</strong> Bengaluru, Karnataka - 560068</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Stackly Agriculture Industry. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+
+    document.querySelector(".form").addEventListener("submit", function(e) {
+    e.preventDefault(); // stops page reload
+    alert("Thank you for contacting Stackly Agriculture Industry!");
+  });
+  </script>
+</body>
+</html>
